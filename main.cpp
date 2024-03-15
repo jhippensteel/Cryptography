@@ -42,21 +42,29 @@ int main() {
         fio<<application<<":"<<plainText<<endl;
     }
 
-    if(action == "DECRYPT"){
-        string fileText, cryptText, key, application;
+    if(action == "DECRYPT" || action =="decrypt" || action=="d"){
+        string fileText, cryptText, key, application, userApp;
         cryptText, application = "";
         int c;
+        cout<<"Application:";
+        cin>>userApp;
+        cout<<"\n";
         cout<<"Key:";
         cin>>key;
         getline(fio, fileText);
+        int x = -1;
 
-        for(int i=0;i<fileText.length();i++){
-            if(fileText[i] == *":"){
-                c = i;
-                break;
+        while(application != userApp && c < fileText.length()) {
+
+            for (int i = x+1; i < fileText.length(); i++) {
+                if (fileText[i] == *":") {
+                    c = i;
+                    break;
+                }
             }
+            for (int i = 0; i < c; i++) { application += fileText[i]; }
+            x=c;
         }
-        for(int i=0;i<c;i++){application += fileText[i];}
         for(int i=c+1;i<fileText.length();i++){cryptText += fileText[i];}
 
         for(int i=1;i<=key.length();i++) {
