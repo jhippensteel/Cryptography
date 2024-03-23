@@ -45,7 +45,7 @@ int main() {
     if(action == "DECRYPT" || action =="decrypt" || action=="d"){
         string fileText, cryptText, key, application, userApp;
         cryptText, application = "";
-        int c;
+        int c = 0;
         cout<<"Application:";
         cin>>userApp;
         cout<<"\n";
@@ -63,6 +63,7 @@ int main() {
                 }
             }
             for (int i = 0; i < c; i++) { application += fileText[i]; }
+            cout<<application;
             x=c;
         }
         for(int i=c+1;i<fileText.length();i++){cryptText += fileText[i];}
