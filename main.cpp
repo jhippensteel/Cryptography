@@ -45,27 +45,28 @@ int main() {
     if(action == "DECRYPT" || action =="decrypt" || action=="d"){
         string fileText, cryptText, key, application, userApp;
         cryptText, application = "";
-        int c = 0;
+        int c, x;
         cout<<"Application:";
         cin>>userApp;
         cout<<"\n";
         cout<<"Key:";
         cin>>key;
-        getline(fio, fileText);
-        int x = -1;
 
-        while(application != userApp && c < fileText.length()) {
-
-            for (int i = x+1; i < fileText.length(); i++) {
-                if (fileText[i] == *":") {
+        while(getline(fio, fileText)){
+            application = "";
+            for(int i=0;i<fileText.length();i++){
+                if(fileText[i] == *":"){
                     c = i;
                     break;
                 }
+                application += fileText[i];
             }
-            for (int i = 0; i < c; i++) { application += fileText[i]; }
-            cout<<application;
-            x=c;
+            if(application == userApp){
+                cout<<"Success! App Found.\n";
+                break;
+            }
         }
+
         for(int i=c+1;i<fileText.length();i++){cryptText += fileText[i];}
 
         for(int i=1;i<=key.length();i++) {
